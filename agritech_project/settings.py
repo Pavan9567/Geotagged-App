@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-dubpdiy@pjq!2i9_ri!ivb68^mt9_h!ioy^=2$2b@kmos4-)k@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['your-app.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['geotag-app.onrender.com', 'localhost']
 
 
 # Application definition
