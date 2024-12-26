@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-dubpdiy@pjq!2i9_ri!ivb68^mt9_h!ioy^=2$2b@kmos4-)k@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['geotag-app.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['geotag-app.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'agritech_db',
         'USER': 'pavan',
         'PASSWORD': 'pavan2001',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
