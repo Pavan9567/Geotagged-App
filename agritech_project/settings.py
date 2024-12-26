@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dubpdiy@pjq!2i9_ri!ivb68^mt9_h!ioy^=2$2b@kmos4-)k@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['geotag-app.onrender.com', '127.0.0.1']
 
@@ -89,7 +89,9 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://...')
+}
 
 
 # Password validation
