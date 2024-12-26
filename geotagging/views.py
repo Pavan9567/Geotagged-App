@@ -2,12 +2,18 @@ from django.shortcuts import redirect, render
 from .models import GeotaggedImage
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.template import loader
 import pytesseract
 import cv2
 import numpy as np
 
 # Create your views here.
+
+def main(request):
+    template = loader.get_template('main.html')
+    return HttpResponse(template.render())
+
 def extract_geolocation(image_path):
     image = Image.open(image_path)
     exif_data = image._getexif()
