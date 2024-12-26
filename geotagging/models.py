@@ -9,4 +9,4 @@ class GeotaggedImage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Image {self.id} - {self.timestamp}"
+        return f"Image {self.id}: {self.timestamp}"
