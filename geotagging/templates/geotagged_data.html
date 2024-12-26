@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geotagged Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-green-600 text-white py-4">
+        <h1 class="text-center text-2xl font-bold">Geotagged Data</h1>
+    </header>
+    <main class="container mx-auto mt-6">
+        <div class="mb-4">
+            <a href="/geotagging/upload/" class="text-green-600 hover:underline">Upload New Image</a>
+            <a href="/geotagging/images/" class="text-green-600 hover:underline ml-4">View Images</a>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-green-200">
+                    <tr>
+                        <th class="text-left py-3 px-4 text-gray-700">#</th>
+                        <th class="text-left py-3 px-4 text-gray-700">Image</th>
+                        <th class="text-left py-3 px-4 text-gray-700">Extracted Data</th>
+                        <th class="text-left py-3 px-4 text-gray-700">Latitude</th>
+                        <th class="text-left py-3 px-4 text-gray-700">Longitude</th>
+                        <th class="text-left py-3 px-4 text-gray-700">Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in geotagged_data %}
+                    <tr class="border-t hover:bg-green-50">
+                        <td class="py-3 px-4">{{ forloop.counter }}</td>
+                        <td class="py-3 px-4">
+                            <img src="{{ data.image.url }}" alt="Image Thumbnail" class="h-16 w-16 rounded-lg shadow">
+                        </td>
+                        <td class="py-3 px-4 text-gray-600">
+                            {{ data.extracted_data|truncatechars:50|default:"No data extracted" }}
+                        </td>
+                        <td class="py-3 px-4 text-gray-600">{{ data.latitude }}</td>
+                        <td class="py-3 px-4 text-gray-600">{{ data.longitude }}</td>
+                        <td class="py-3 px-4 text-gray-600">{{ data.timestamp }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-4 text-gray-500">
+                            No geotagged data available.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

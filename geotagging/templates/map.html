@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Visualization</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen"> 
+    <header class="bg-indigo-600 text-white py-4">
+        <h1 class="text-center text-2xl font-bold">Map Visualization</h1>
+    </header>
+    <main class="container mx-auto mt-6">
+        <div id="map" class="w-full h-96 rounded-md shadow-md"></div>
+        <script>
+            const map = L.map('map').setView([0, 0], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Fetch geotagged data
+            fetch('/api/geotagged-data/')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(point => {
+                        if (point.latitude && point.longitude) {
+                            L.marker([point.latitude, point.longitude]).addTo(map)
+                                .bindPopup(`<b>Data:</b> ${point.extracted_data}`);
+                        }
+                    });
+                });
+        </script>
+    </main>
+</body>
+</html>

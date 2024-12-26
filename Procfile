@@ -1,0 +1,1 @@
+web: gunicorn agritech_project.wsgi

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Images</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-indigo-600 text-white py-4">
+        <h1 class="text-center text-2xl font-bold">Uploaded Images</h1>
+    </header>
+    <main class="container mx-auto mt-6">
+        <div class="mb-4">
+            <a href="/upload/" class="text-indigo-600 hover:underline">Upload New Image</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for image in images %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="{{ image.image.url }}" alt="Uploaded Image" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-bold text-gray-700">Extracted Data</h2>
+                    <p class="text-sm text-gray-600 mb-2">
+                        {{ image.extracted_data|default:"No data extracted" }}
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <p><strong>Latitude:</strong> {{ image.latitude }}</p>
+                        <p><strong>Longitude:</strong> {{ image.longitude }}</p>
+                        <p><strong>Timestamp:</strong> {{ image.timestamp }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-gray-500">No images uploaded yet.</p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
