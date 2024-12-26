@@ -3,12 +3,9 @@ from .models import GeotaggedImage
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 from django.http import JsonResponse
-from django.conf import settings
 import pytesseract
 import cv2
 import numpy as np
-
-pytesseract.pytesseract.tesseract_cmd = settings.TESSERACT_CMD
 
 # Create your views here.
 def extract_geolocation(image_path):
