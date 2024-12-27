@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'agritech_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'agritech_db',
@@ -87,7 +87,7 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
-}
+}"""
 
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
