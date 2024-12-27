@@ -51,13 +51,8 @@ def extract_geolocation(image_path):
 def upload_image(request):
     if request.method == 'POST':
         uploaded_image = request.FILES['image']
-        temp_path = f"temp_{uploaded_image.name}"
-        with open(temp_path, 'wb+') as temp_file:
-            for chunk in uploaded_image.chunks():
-                temp_file.write(chunk)
-        lati, longi = extract_geolocation(temp_path)
-        processed_image = preprocess_image(temp_path)
-        text = pytesseract.image_to_string(processed_image)
+        lati, longi = extract_geolocation(uploaded_image)
+        text = pytesseract.image_to_string(Image.open(uploaded_image))
         geotagged_image = GeotaggedImage(
             image = uploaded_image,
             extracted_data = text,
@@ -99,3 +94,24 @@ def preprocess_image(image_path):
     image = cv2.GaussianBlur(image, (5, 5), 0)
     _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     return Image.fromarray(image)
+
+def upload_image(request):
+    if request.method == 'POST':
+        uploaded_image = request.FILES['image']
+        temp_path = f"temp_{uploaded_image.name}"
+        with open(temp_path, 'wb+') as temp_file:
+            for chunk in uploaded_image.chunks():
+                temp_file.write(chunk)
+        lati, longi = extract_geolocation(temp_path)
+        processed_image = preprocess_image(temp_path)
+        text = pytesseract.image_to_string(processed_image)
+        geotagged_image = GeotaggedImage(
+            image = uploaded_image,
+            extracted_data = text,
+            latitude = lati or 0.0,
+            longitude = longi or 0.0
+        )
+        geotagged_image.save()
+        return redirect('image_list')
+    
+    return render(request, "upload.html")
