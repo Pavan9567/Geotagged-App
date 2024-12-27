@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dubpdiy@pjq!2i9_ri!ivb68^mt9_h!ioy^=2$2b@kmos4-)k@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['geotag-app.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'agritech_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'agritech_db',
@@ -88,13 +88,13 @@ WSGI_APPLICATION = 'agritech_project.wsgi.application'
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
-}"""
+}
 
-DATABASES = {
+"""DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
-}
+}"""
 
 
 # Password validation
