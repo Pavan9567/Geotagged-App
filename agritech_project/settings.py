@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'agritech_project.wsgi.application'
 }"""
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://geotagged_db_e12h_user:LwJ53rwtKhbdoH7sxBvPr9rPXy2V4N9m@dpg-ctn24n5umphs73c2heng-a/geotagged_db_e12h')
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 
